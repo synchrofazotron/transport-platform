@@ -1,0 +1,14 @@
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\bin\Debug\Bookstore.exe.config
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\bin\Debug\Bookstore.exe
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\bin\Debug\Bookstore.pdb
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\MainWindow.baml
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\MainWindow.g.cs
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\App.g.cs
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore_MarkupCompile.cache
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore.g.resources
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore.Properties.Resources.resources
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore.csproj.GenerateResource.Cache
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore.exe
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore.pdb
+c:\documents\visual studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Simple Styles.baml
+c:\documents\visual studio 2012\Projects\Bookstore\Bookstore\obj\Debug\Bookstore.csprojResolveAssemblyReference.cache
