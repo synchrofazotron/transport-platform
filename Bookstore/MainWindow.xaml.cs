@@ -92,7 +92,6 @@ namespace Bookstore
             List<Items> table = new List<Items>();
             using (SqlConnection connection = new SqlConnection(connectionString[0]))
             {
-                //String commandText = "SELECT goods_t.book_name, goods_t.price, goods_t.genre, goods_t.authors, shops_t.shop_name, shopassort.shop_amount FROM sbs.shop_assort shopassort LEFT JOIN sbs.goods goods_t ON shopassort.item_id = goods_t.item_id LEFT JOIN sbs.shops shops_t ON shopassort.shop_id = shops_t.shop_id ORDER BY shop_name";
                 String commandText = "SELECT subquery.book_name, subquery.price, subquery.genre, subquery.authors, subquery.shop_name, subquery.shop_amount  FROM (SELECT goods_t.book_name, goods_t.price, goods_t.genre, goods_t.authors, shops_t.shop_name, shopassort.shop_amount FROM sbs.shop_assort shopassort LEFT JOIN sbs.goods goods_t ON shopassort.item_id = goods_t.item_id LEFT JOIN sbs.shops shops_t ON shopassort.shop_id = shops_t.shop_id) subquery WHERE shop_name LIKE"+ shop_name_string +" ORDER BY shop_name";
                 using (SqlCommand command = new SqlCommand(commandText, connection))
                 {
@@ -222,11 +221,3 @@ namespace Bookstore
         }
 	}
 }
-
-
-/* код от тестовой кнопки
-            this.datagrid1.ItemsSource = DBConnect.viewAll();
-            this.datagrid1.Items.Refresh();
-            this.combo1.ItemsSource = combobox.viewbox();
-            this.combo1.Items.Refresh();
-*/
