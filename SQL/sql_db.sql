@@ -20,8 +20,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[avaliable]
 -- ----------------------------
-DROP TABLE [sbs].[avaliable]
-GO
+
 CREATE TABLE [sbs].[avaliable] (
 [item_id] int NOT NULL ,
 [warehouse_id] int NOT NULL ,
@@ -54,8 +53,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[client_info]
 -- ----------------------------
-DROP TABLE [sbs].[client_info]
-GO
+
 CREATE TABLE [sbs].[client_info] (
 [client_id] int NOT NULL ,
 [first_name] varchar(20) NULL ,
@@ -78,8 +76,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[expeditor]
 -- ----------------------------
-DROP TABLE [sbs].[expeditor]
-GO
+
 CREATE TABLE [sbs].[expeditor] (
 [expeditor_id] int NOT NULL ,
 [first_name_exp] varchar(20) NULL ,
@@ -104,8 +101,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[goods]
 -- ----------------------------
-DROP TABLE [sbs].[goods]
-GO
+
 CREATE TABLE [sbs].[goods] (
 [item_id] int NOT NULL ,
 [book_name] varchar(100) NOT NULL ,
@@ -158,8 +154,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[orders]
 -- ----------------------------
-DROP TABLE [sbs].[orders]
-GO
+
 CREATE TABLE [sbs].[orders] (
 [order_id] int NOT NULL ,
 [item_id] int NOT NULL ,
@@ -197,8 +192,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[shop_assort]
 -- ----------------------------
-DROP TABLE [sbs].[shop_assort]
-GO
+
 CREATE TABLE [sbs].[shop_assort] (
 [shop_id] int NOT NULL ,
 [item_id] int NOT NULL ,
@@ -255,8 +249,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[shop_warehouse]
 -- ----------------------------
-DROP TABLE [sbs].[shop_warehouse]
-GO
+
 CREATE TABLE [sbs].[shop_warehouse] (
 [shop_id] int NOT NULL ,
 [warehouse_id] int NOT NULL ,
@@ -275,8 +268,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[shops]
 -- ----------------------------
-DROP TABLE [sbs].[shops]
-GO
+
 CREATE TABLE [sbs].[shops] (
 [shop_id] int NOT NULL ,
 [shop_name] nvarchar(50) NOT NULL ,
@@ -303,8 +295,7 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[warehouse]
 -- ----------------------------
-DROP TABLE [sbs].[warehouse]
-GO
+
 CREATE TABLE [sbs].[warehouse] (
 [warehouse_id] int NOT NULL ,
 [warehouse_name] varchar(22) NOT NULL ,

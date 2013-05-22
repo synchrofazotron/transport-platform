@@ -73,16 +73,55 @@ namespace Bookstore
             public String reader3 { get; set; }
             public String reader4 { get; set; }
             public String reader5 { get; set; }
+            public String reader6 { get; set; }
             public override String ToString()
             {
                 return reader0;
             }
         }
+
         // ---- Class for all items from DB - END
 
+
+        // ---- Query function - START
+        public void DBQuery(String commandText)
+        {
+            string[] connString = File.ReadAllLines("config.txt");
+            SqlConnection conn = new SqlConnection(connString[0]);
+            try
+            {
+                conn.Open();
+            }
+            catch (SqlException se)
+            {
+                MessageBox.Show("Connection error: {0}", se.Message, MessageBoxButton.OK);
+                return;
+            }
+
+
+            SqlCommand cmd = new SqlCommand(commandText, conn);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                MessageBox.Show("Request error!");
+
+                return;
+            }
+            conn.Close();
+            conn.Dispose();
+        }
+        // ---- Query function - END
+
+
+       
         // ---- Datagrid fill function for client's - START
         public class DBConnect  {
 
+ 
         public static List<Items> viewAll(String commandText)
         {
 
@@ -111,8 +150,80 @@ namespace Bookstore
             }
             return table;
         }
+
+
+
+        /// ---- Datagrid fill function for EXPEDITOR's - START
+
+        public static List<Items> expeditorpanel(String commandText)
+        {
+
+            string[] connectionString = File.ReadAllLines("config.txt");
+            List<Items> table = new List<Items>();
+            using (SqlConnection connection = new SqlConnection(connectionString[0]))
+            {
+                using (SqlCommand command = new SqlCommand(commandText, connection))
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Items item = new Items();
+                            item.reader0 = reader[0].ToString();
+                            item.reader1 = reader[1].ToString();
+                            item.reader2 = reader[2].ToString();
+                            item.reader3 = reader[3].ToString();
+                            item.reader4 = reader[4].ToString();
+                            item.reader5 = reader[5].ToString();
+                            item.reader6 = reader[6].ToString();
+                            table.Add(item);
+                        }
+                    }
+                }
+            }
+            return table;
+        }
+
+            ///  ---- Datagrid fill function for EXPEDITOR's - END
+
+
             }
         // ---- Datagrid fill function for client's - END
+
+
+
+        // ---- Datagrid fill function for WAREHOUSE - START
+        public class warehousefill
+        {
+
+            public static List<Items> viewAll(String commandText)
+            {
+
+                string[] connectionString = File.ReadAllLines("config.txt");
+                List<Items> table = new List<Items>();
+                using (SqlConnection connection = new SqlConnection(connectionString[0]))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Items item = new Items();
+                                item.reader0 = reader[0].ToString();
+                                item.reader1 = reader[1].ToString();
+                                item.reader2 = reader[2].ToString();
+                                table.Add(item);
+                            }
+                        }
+                    }
+                }
+                return table;
+            }
+        }
+        // ---- Datagrid fill function for WAREHOUSE - END
 
 
 
@@ -191,7 +302,7 @@ namespace Bookstore
                 order_filter = "IN (" + order_filter + ")";
             }
 
-            this.datagrid_orderstatus.ItemsSource = DBConnect.viewAll("SELECT orders.order_status, subquery.book_name, orders.amount, subquery.last_name, subquery.warehouse_name, subquery.last_name_exp FROM sbs.orders, (SELECT goods_t.book_name, client_info_t.last_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status "+ order_filter +" ORDER BY order_status DESC");
+            this.datagrid_orderstatus.ItemsSource = DBConnect.expeditorpanel("SELECT subquery.order_id, subquery.book_name, subquery.amount, subquery.last_name, subquery.warehouse_name, subquery.last_name_exp, subquery.order_status FROM (SELECT orders_t.order_id, orders_t.order_status, orders_t.amount, goods_t.book_name, client_info_t.last_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status " + order_filter + " ORDER BY order_id");
             this.datagrid_orderstatus.Items.Refresh();
         }
         // ---- EXPEDITOR CheckBoxes - END
@@ -208,6 +319,7 @@ namespace Bookstore
             this.expeditor.Visibility = System.Windows.Visibility.Hidden;
             this.admin.Visibility = System.Windows.Visibility.Hidden;
             this.label_c.Visibility = System.Windows.Visibility.Hidden;
+            this.warehouse_datagrid.Visibility = System.Windows.Visibility.Hidden;
 
             this.datagrid1.ItemsSource = DBConnect.viewAll("SELECT subquery.book_name, subquery.price, subquery.genre, subquery.authors, subquery.shop_name, subquery.shop_amount  FROM (SELECT goods_t.book_name, goods_t.price, goods_t.genre, goods_t.authors, shops_t.shop_name, shopassort.shop_amount FROM sbs.shop_assort shopassort LEFT JOIN sbs.goods goods_t ON shopassort.item_id = goods_t.item_id LEFT JOIN sbs.shops shops_t ON shopassort.shop_id = shops_t.shop_id) subquery WHERE shop_name LIKE '%' ORDER BY shop_name");
             this.datagrid1.Items.Refresh();
@@ -230,6 +342,8 @@ namespace Bookstore
             this.label_c.Visibility = System.Windows.Visibility.Visible;
             this.order_list_box.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
+            this.warehouse_datagrid.Visibility = System.Windows.Visibility.Hidden;
+            this.complete_order.IsEnabled = false;
         }
         // ---- Return button - END
 
@@ -245,9 +359,11 @@ namespace Bookstore
             this.expeditor.Visibility = System.Windows.Visibility.Hidden;
             this.admin.Visibility = System.Windows.Visibility.Hidden;
             this.label_c.Visibility = System.Windows.Visibility.Hidden;
+            this.warehouse_datagrid.Visibility = System.Windows.Visibility.Hidden;
 
-            this.datagrid_orderstatus.ItemsSource = DBConnect.viewAll("SELECT orders.order_status, subquery.book_name, orders.amount, subquery.last_name, subquery.warehouse_name, subquery.last_name_exp FROM sbs.orders, (SELECT goods_t.book_name, client_info_t.last_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status LIKE '%' ORDER BY order_status DESC");
+            this.datagrid_orderstatus.ItemsSource = DBConnect.expeditorpanel("SELECT subquery.order_id, subquery.book_name, subquery.amount, subquery.last_name, subquery.warehouse_name, subquery.last_name_exp, subquery.order_status FROM (SELECT orders_t.order_id, orders_t.order_status, orders_t.amount, goods_t.book_name, client_info_t.last_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status LIKE '%' ORDER BY order_id");
             this.datagrid_orderstatus.Items.Refresh();
+            this.complete_order.IsEnabled = false;
 
         }
         // ---- EXPEDITOR button - END
@@ -261,5 +377,47 @@ namespace Bookstore
             const string caption = "Administrator";
             MessageBox.Show(message, caption, MessageBoxButton.OK);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.warehouse_datagrid.ItemsSource = warehousefill.viewAll("SELECT shops_t.shop_name, warehouse_t.warehouse_name, shop_warehouse_t.warehouse_type FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
+            this.warehouse_datagrid.Items.Refresh();
+            this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
+            this.warehouse_datagrid.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        // ---- Button for editing orders, for EXPEDITOR - START
+        private void order_status_change_Click(object sender, RoutedEventArgs e)
+        {
+            Order_Form order_form = new Order_Form();
+            order_form.Show();
+        }
+        // ---- Button for editing orders, for EXPEDITOR - END
+
+
+        // ---- Button for complete orders, for EXPEDITOR - START
+        private void complete_order_Click(object sender, RoutedEventArgs e)
+        {
+            Items item = (Items)datagrid_orderstatus.SelectedItem;
+            if (!item.reader6.Equals("У виконанні"))
+            {
+                MessageBox.Show("You can modify orders with 'У виконанні' status only!");
+                return;
+            }
+            DBQuery("UPDATE sbs.orders SET order_status = 'Виконана' WHERE order_id = '" + item + "'");
+            checkboxselect(sender,e);   
+        }
+
+        // ---- Button for complete orders, for EXPEDITOR - START
+
+
+        // ---- Selection chandeg, orders datagrid, for EXPEDITOR - START
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.complete_order.IsEnabled = true;
+        }
+        // ---- Selection chandeg, orders datagrid, for EXPEDITOR - START
+   
 	}
 }
+ 
