@@ -15,7 +15,7 @@ namespace Bookstore
     /// </summary>
     public partial class App : Application
     {
-        private const int MINIMUM_SPLASH_TIME = 3000; // Miliseconds
+        private const int MINIMUM_SPLASH_TIME = 2000; // Miliseconds
         private const int SPLASH_FADE_TIME = 500;     // Miliseconds
 
         protected override void OnStartup(StartupEventArgs e)
