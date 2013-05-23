@@ -429,7 +429,84 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-<!--Expanders for expeditor  START-->
+            <DataGrid x:Name="datagrid_books" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" >
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn 
+            			Header="Shop Name"
+            			Width="80"
+            			Binding="{Binding reader0}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Warehouse Name"
+            			Width="120"
+            			Binding="{Binding reader1}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Book Name"
+            			Width="*"
+            			Binding="{Binding reader2}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Amount"
+            			Width="SizeToHeader"
+            			Binding="{Binding reader3}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--Expanders for expeditor  START-->
             <StackPanel Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
                 <ListBox x:Name="order_list_box" TextOptions.TextFormattingMode="Display" Visibility="Hidden">
                     <ListBox.Resources>
@@ -442,7 +519,7 @@
                     <Expander x:Name="order_status_expander" Background="#191395BB" Width="135" Header="Order's" TextOptions.TextFormattingMode="Display" Expanded="Orders_Expanded">
                         <Expander.Content>
                             <ScrollViewer Height="150" VerticalAlignment="Top" >
-                        <StackPanel Height="165">
+                        <StackPanel Height="200">
                             <Grid Height="305">
                                 <CheckBox x:Name="New" Content="Нова" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <CheckBox x:Name="completed" Content="Виконана" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
@@ -450,8 +527,10 @@
                             <CheckBox x:Name="inprogress" Content="У виконанні" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 <CheckBox x:Name="canceled" Content="Скасована" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,80,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <GroupBox Header="Order status" Height="105" VerticalAlignment="Top" BorderThickness="1" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="105" Margin="5,0,0,0"/>
-                                        <Button x:Name="order_status_change" Content="Edit order..." Width="105" Height="20" Margin="5,133,0,0" Click="order_status_change_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        <Button x:Name="order_status_change" Content="Edit order..." Width="105" Height="20" Margin="5,156,0,0" Click="order_status_change_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                                         <Button x:Name="complete_order" Content="Complete Order" Width="105" Height="20" Margin="5,110,0,0" Click="complete_order_Click" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+                                        <Button x:Name="reject_order" Content="Reject Order" Width="105" Height="20" Margin="5,133,0,0" Click="reject_order_Click" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+
                                     </Grid>
                         </StackPanel>
                             </ScrollViewer>
@@ -460,11 +539,25 @@
                     <Expander x:Name="Warehouse_expander" Background="#191395BB" Width="135" Header="Warehouses" TextOptions.TextFormattingMode="Display" Expanded="Warehouse_Expander_Expanded">
                         <Expander.Content>
                             <ScrollViewer Height="100" VerticalAlignment="Top" >
-                                <StackPanel Width="90" Height="90">
+                                <StackPanel Width="90">
                                     <RadioButton Content="Grill" GroupName="Two"/>
                                     <RadioButton Content="Bake" GroupName="Two"/>
                                     <RadioButton Content="Fry" GroupName="Two"/>
 
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Expander.Content>
+                    </Expander>
+
+                    <Expander x:Name="Books_expander" Background="#191395BB" Width="135" Header="Books" TextOptions.TextFormattingMode="Display" Expanded="Books_expander_Expanded_1">
+                        <Expander.Content>
+                            <ScrollViewer Height="55" VerticalAlignment="Top" >
+                                <StackPanel Height="55">
+                                    <Grid Height="55">
+                                    <Button x:Name="book_add_amount" Content="Increase amount" Width="105" Height="20" Margin="5,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+                                        <Button x:Name="book_add_new" Content="Add New Book..." Width="105" Height="20" Margin="5,28,0,0" Click="order_status_change_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                                    </Grid>
                                 </StackPanel>
                             </ScrollViewer>
                         </Expander.Content>

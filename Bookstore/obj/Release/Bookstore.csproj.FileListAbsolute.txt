@@ -13,3 +13,4 @@ C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Booksto
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Simple Styles.baml
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.Order_Form.resources
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.Admin_AddWarehouse.resources
+c:\documents\visual studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.csprojResolveAssemblyReference.cache
