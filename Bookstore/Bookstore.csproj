@@ -67,6 +67,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Admin_AddWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin_AddWarehouse.Designer.cs">
+      <DependentUpon>Admin_AddWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -100,6 +106,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Admin_AddWarehouse.resx">
+      <DependentUpon>Admin_AddWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Order_Form.resx">
       <DependentUpon>Order_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +147,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bs2_Images\Book_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bs2_Images\expeditor_png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bs2_Images\splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bs2_Images\admin_png.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

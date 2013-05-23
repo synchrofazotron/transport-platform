@@ -23,8 +23,8 @@ namespace Bookstore
     /// </summary>
 
     public partial class MainWindow : Window
-    {	
-	
+    {
+        public static MainWindow instance;
 	
      // ---- Window control function's - START
             protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -53,6 +53,7 @@ namespace Bookstore
         public MainWindow()
         {
             InitializeComponent();
+            instance = this;
             combo1.SelectionChanged += new SelectionChangedEventHandler(comboBox1SelectionChanged);
 
         }
@@ -81,6 +82,36 @@ namespace Bookstore
         }
 
         // ---- Class for all items from DB - END
+
+        static public int ExecutScalarQuery(string sql)
+        {
+            Int32 ID = 0;
+            string[] connString = File.ReadAllLines("config.txt");
+            using (SqlConnection conn = new SqlConnection(connString[0]))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                try
+                {
+                    conn.Open();
+                    ID = (Int32)cmd.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            return (int)ID;
+        }
+
+
+        // ---- EXECUT sacalar function - START
+
+
+
+
+
+        // ---- EXECUT sacalar function - END
+
 
 
         // ---- Query function - START
@@ -347,6 +378,9 @@ namespace Bookstore
             this.complete_order.IsEnabled = false;
             this.order_status_expander.IsExpanded = false;
             this.Warehouse_expander.IsExpanded = false;
+            this.img_expeditor.Visibility = System.Windows.Visibility.Hidden;
+            this.admin_panel_left.Visibility = System.Windows.Visibility.Hidden;
+            this.admin_img_png.Visibility = System.Windows.Visibility.Hidden;
 
         }
         // ---- Return button - END
@@ -365,6 +399,7 @@ namespace Bookstore
             this.label_c.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_warehouse.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
+            this.img_expeditor.Visibility = System.Windows.Visibility.Visible;
 
             this.complete_order.IsEnabled = false;
 
@@ -375,10 +410,23 @@ namespace Bookstore
         //admin button
         private void admin_Click(object sender, RoutedEventArgs e)
         {
-            const string message =
-        "Will be added soon...";
-            const string caption = "Administrator";
-            MessageBox.Show(message, caption, MessageBoxButton.OK);
+        //    const string message =
+        //"Will be added soon...";
+        //    const string caption = "Administrator";
+        //    MessageBox.Show(message, caption, MessageBoxButton.OK);
+
+            this.back.Visibility = System.Windows.Visibility.Visible;
+            this.admin_panel_left.Visibility = System.Windows.Visibility.Visible;
+            this.admin_img_png.Visibility = System.Windows.Visibility.Visible;
+
+            this.user.Visibility = System.Windows.Visibility.Hidden;
+            this.img_openbook.Visibility = System.Windows.Visibility.Hidden;
+            this.expeditor.Visibility = System.Windows.Visibility.Hidden;
+            this.admin.Visibility = System.Windows.Visibility.Hidden;
+            this.label_c.Visibility = System.Windows.Visibility.Hidden;
+            this.datagrid_warehouse.Visibility = System.Windows.Visibility.Hidden;
+            this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
+            
         }
 
         // ---- Button for editing orders, for EXPEDITOR - START
@@ -422,6 +470,7 @@ namespace Bookstore
             this.complete_order.IsEnabled = false;
             this.datagrid_warehouse.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Visible;
+            this.img_expeditor.Visibility = System.Windows.Visibility.Hidden;
         }
         // -- Expanded func for Orders - END
 
@@ -432,9 +481,18 @@ namespace Bookstore
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_warehouse.ItemsSource = warehousefill.viewAll("SELECT shops_t.shop_name, warehouse_t.warehouse_name, shop_warehouse_t.warehouse_type FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
             this.datagrid_warehouse.Items.Refresh();
+            this.img_expeditor.Visibility = System.Windows.Visibility.Hidden;
 
         }
         // -- Expanded func for Orders - END
+
+        public void admin_warehouse_add_btn_Click_1(object sender, RoutedEventArgs e)
+        {
+            Admin_AddWarehouse add_warehouse_form = new Admin_AddWarehouse();
+            add_warehouse_form.Show();
+            Admin_AddWarehouse.instance.warehouse_ID_get(ExecutScalarQuery("SELECT MAX(warehouse.warehouse_id) FROM sbs.warehouse"));
+        }
+        
 
    
 	}

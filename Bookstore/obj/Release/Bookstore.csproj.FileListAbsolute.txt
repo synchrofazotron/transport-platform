@@ -1,7 +1,6 @@
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\bin\Release\Bookstore.exe.config
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\bin\Release\Bookstore.exe
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\bin\Release\Bookstore.pdb
-C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.csprojResolveAssemblyReference.cache
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\MainWindow.baml
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\MainWindow.g.cs
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\App.g.cs
@@ -12,4 +11,5 @@ C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Booksto
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.exe
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.pdb
 C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Simple Styles.baml
-C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.Order_Form.resources
+C:\Documents\Visual Studio 2012\Projects\Bookstore\Bookstore\obj\Release\Bookstore.Admin_AddWarehouse.resources
