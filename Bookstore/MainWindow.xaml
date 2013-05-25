@@ -99,7 +99,7 @@
     			</Image>
     		</Canvas>
             <ComboBox x:Name="combo1" Canvas.Left="20" Canvas.Top="110" Width="130" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Hidden"/>
-            <DataGrid x:Name="datagrid1" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" >
+            <DataGrid x:Name="datagrid1" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
             Header="Book Name"
@@ -237,7 +237,7 @@
                     " ToolTip="All function for shop administrator" TextOptions.TextFormattingMode="Display" Foreground="#FF573633" Click="admin_Click" d:IsHidden="True"/>
             <Label x:Name="label_c" Content="SBS© 2013" Canvas.Left="650" Canvas.Top="415" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" d:IsHidden="True"/>
             <Button x:Name="back" Content="Back" Canvas.Left="20" Canvas.Top="28" Width="75" TextOptions.TextFormattingMode="Display" Click="back_Click" Foreground="#FF573633" Visibility="Hidden" d:IsHidden="True"/>
-            <DataGrid x:Name="datagrid_orderstatus" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionChanged="dataGrid_SelectionChanged" >
+            <DataGrid x:Name="datagrid_orderstatus" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionChanged="dataGrid_SelectionChanged" SelectionMode="Single" >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn 
@@ -370,7 +370,7 @@
             </DataGrid>
 
 
-            <DataGrid x:Name="datagrid_warehouse" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" >
+            <DataGrid x:Name="datagrid_warehouse" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
 
                        <DataGridTextColumn 
@@ -429,7 +429,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid x:Name="datagrid_books" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" >
+            <DataGrid x:Name="datagrid_books" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn 
@@ -518,8 +518,8 @@
                     </ListBox.Resources>
                     <Expander x:Name="order_status_expander" Background="#191395BB" Width="135" Header="Order's" TextOptions.TextFormattingMode="Display" Expanded="Orders_Expanded">
                         <Expander.Content>
-                            <ScrollViewer Height="150" VerticalAlignment="Top" >
-                        <StackPanel Height="200">
+                            <ScrollViewer Height="180" VerticalAlignment="Top" >
+                        <StackPanel Height="180">
                             <Grid Height="305">
                                 <CheckBox x:Name="New" Content="Нова" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <CheckBox x:Name="completed" Content="Виконана" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
@@ -527,9 +527,9 @@
                             <CheckBox x:Name="inprogress" Content="У виконанні" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 <CheckBox x:Name="canceled" Content="Скасована" TextOptions.TextFormattingMode="Display" Height="15" Width="83" Checked="checkboxselect" Unchecked="checkboxselect" Margin="20,80,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <GroupBox Header="Order status" Height="105" VerticalAlignment="Top" BorderThickness="1" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="105" Margin="5,0,0,0"/>
-                                        <Button x:Name="order_status_change" Content="Edit order..." Width="105" Height="20" Margin="5,156,0,0" Click="order_status_change_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                        <Button x:Name="complete_order" Content="Complete Order" Width="105" Height="20" Margin="5,110,0,0" Click="complete_order_Click" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
-                                        <Button x:Name="reject_order" Content="Reject Order" Width="105" Height="20" Margin="5,133,0,0" Click="reject_order_Click" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+                                        <Button x:Name="order_status_change" Content="Process order..." Width="105" Height="20" Margin="5,110,0,0" Click="order_status_change_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        <Button x:Name="complete_order" Content="Complete Order" Width="105" Height="20" Margin="5,133,0,0" Click="complete_order_Click" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+                                        <Button x:Name="reject_order" Content="Reject Order" Width="105" Height="20" Margin="5,156,0,0" Click="reject_order_Click" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
 
                                     </Grid>
                         </StackPanel>

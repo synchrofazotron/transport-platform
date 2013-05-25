@@ -60,9 +60,17 @@ namespace Bookstore
                 MessageBox.Show("You must input all values!", "Error!");
                 return;
             }
-            MainWindow.instance.DBQuery("INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'" + this.textBox_id.Text + "', N'" + this.textBox_name.Text + "', N'" + this.textBox_location.Text + "')");
-            warehouse_ID_get(Convert.ToInt32(this.textBox_id.Text));
-            MessageBox.Show("Record added!");
+            byte status = MainWindow.instance.DBQuery("INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'" + this.textBox_id.Text + "', N'" + this.textBox_name.Text + "', N'" + this.textBox_location.Text + "')");
+            if (status == 0)
+            {
+                warehouse_ID_get(Convert.ToInt32(this.textBox_id.Text));
+                MessageBox.Show("Record added!");
+            }
+            this.textBox_name.Text = "NAME";
+            this.textBox_name.ForeColor = Color.Gray;
+            this.textBox_location.Text = "LOCATION";
+            this.textBox_location.ForeColor = Color.Gray;
+
         }
 
         private void decline_btn_Click(object sender, EventArgs e)
