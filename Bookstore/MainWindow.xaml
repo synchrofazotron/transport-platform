@@ -374,7 +374,7 @@
                 <DataGrid.Columns>
 
                        <DataGridTextColumn 
-            			Header="Shop"
+            			Header="Shop Name"
             			Width="*"
             			Binding="{Binding reader0}" >
                         <DataGridTextColumn.ElementStyle>
@@ -392,9 +392,27 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn 
-            			Header="warehouse"
+            			Header="Warehouse Name"
             			Width="*"
             			Binding="{Binding reader1}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Warehouse Location"
+            			Width="*"
+            			Binding="{Binding reader3}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -508,7 +526,7 @@
 
             <!--Expanders for expeditor  START-->
             <StackPanel x:Name="StackPanel_Expeditor" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-                <ListBox x:Name="order_list_box" TextOptions.TextFormattingMode="Display">
+                <ListBox x:Name="order_list_box" TextOptions.TextFormattingMode="Display" Visibility="Hidden">
                     <ListBox.Resources>
                         <Style TargetType="{x:Type Expander}">
                             <Setter
@@ -536,13 +554,11 @@
                             </ScrollViewer>
                         </Expander.Content>
                     </Expander>
-                    <Expander x:Name="Warehouse_expander" Background="#191395BB" Width="135" Header="Warehouses" TextOptions.TextFormattingMode="Display" Expanded="Warehouse_Expander_Expanded">
+                    <Expander x:Name="Warehouse_expander" Background="#191395BB" Width="135" Header="Warehouses" TextOptions.TextFormattingMode="Display">
                         <Expander.Content>
-                            <ScrollViewer Height="100" VerticalAlignment="Top" >
-                                <StackPanel Width="90">
-                                    <RadioButton Content="Grill" GroupName="Two"/>
-                                    <RadioButton Content="Bake" GroupName="Two"/>
-                                    <RadioButton Content="Fry" GroupName="Two"/>
+                            <ScrollViewer Height="30" VerticalAlignment="Top" >
+                                <StackPanel Height="30">
+                                    <Button x:Name="shoow_ware" Content="Show..." Width="105" Height="20" Margin="5,5,0,0" Click="Warehouse_Expander_Expanded" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
                                 </StackPanel>
                             </ScrollViewer>
@@ -551,12 +567,11 @@
 
                     <Expander x:Name="Books_expander" Background="#191395BB" Width="135" Header="Books" TextOptions.TextFormattingMode="Display" Expanded="Books_expander_Expanded_1">
                         <Expander.Content>
-                            <ScrollViewer Height="80" VerticalAlignment="Top" >
-                                <StackPanel Height="80">
-                                    <Grid Height="80">
+                            <ScrollViewer Height="55" VerticalAlignment="Top" >
+                                <StackPanel Height="55">
+                                    <Grid Height="55">
                                         <ComboBox x:Name="combobox_exp_books" Canvas.Left="20" Canvas.Top="110" Width="105" Margin="5,5,0,0" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Visible" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                    <Button x:Name="book_add_amount" Content="Increase amount" Width="105" Height="20" Margin="5,28,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
-                                        <Button x:Name="book_add_new" Content="Add New Book..." Width="105" Height="20" Margin="5,51,0,0" Click="book_add_new_Click_1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        <Button x:Name="book_add_new" Content="Add New Book..." Width="105" Height="20" Margin="5,28,0,0" Click="book_add_new_Click_1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
                                     </Grid>
                                 </StackPanel>

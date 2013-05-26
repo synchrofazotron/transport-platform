@@ -395,7 +395,7 @@ namespace Bookstore
                 order_filter = "IN (" + order_filter + ")";
             }
 
-            this.datagrid_orderstatus.ItemsSource = DBConnect.reader_column_7x("SELECT subquery.order_id, subquery.book_name, subquery.amount, subquery.last_name, subquery.warehouse_name, subquery.last_name_exp, subquery.order_status FROM (SELECT orders_t.order_id, orders_t.order_status, orders_t.amount, goods_t.book_name, client_info_t.last_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status " + order_filter + " ORDER BY order_id");
+            this.datagrid_orderstatus.ItemsSource = DBConnect.reader_column_7x("SELECT subquery.order_id, subquery.book_name, subquery.amount, subquery.last_name +' '+ subquery.first_name AS name, subquery.warehouse_name, subquery.last_name_exp + ' ' + subquery.first_name_exp AS name2, subquery.order_status FROM (SELECT orders_t.order_id, orders_t.order_status, orders_t.amount, goods_t.book_name, client_info_t.last_name, client_info_t.first_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp, expeditor_t.first_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status " + order_filter + " ORDER BY order_id");
             this.datagrid_orderstatus.Items.Refresh();
             this.complete_order.IsEnabled = false;
             this.reject_order.IsEnabled = false;
@@ -483,11 +483,6 @@ namespace Bookstore
         //admin button
         private void admin_Click(object sender, RoutedEventArgs e)
         {
-        //    const string message =
-        //"Will be added soon...";
-        //    const string caption = "Administrator";
-        //    MessageBox.Show(message, caption, MessageBoxButton.OK);
-
             this.back.Visibility = System.Windows.Visibility.Visible;
             this.admin_panel_left.Visibility = System.Windows.Visibility.Visible;
             this.admin_img_png.Visibility = System.Windows.Visibility.Visible;
@@ -573,7 +568,7 @@ namespace Bookstore
         // -- Expanded func for Orders - START
         private void Orders_Expanded(object sender, RoutedEventArgs e)
         {
-            this.datagrid_orderstatus.ItemsSource = DBConnect.reader_column_7x("SELECT subquery.order_id, subquery.book_name, subquery.amount, subquery.last_name, subquery.warehouse_name, subquery.last_name_exp, subquery.order_status FROM (SELECT orders_t.order_id, orders_t.order_status, orders_t.amount, goods_t.book_name, client_info_t.last_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status LIKE '%' ORDER BY order_id");
+            this.datagrid_orderstatus.ItemsSource = DBConnect.reader_column_7x("SELECT subquery.order_id, subquery.book_name, subquery.amount, subquery.last_name +' '+ subquery.first_name AS name, subquery.warehouse_name, subquery.last_name_exp + ' ' + subquery.first_name_exp AS name2, subquery.order_status FROM (SELECT orders_t.order_id, orders_t.order_status, orders_t.amount, goods_t.book_name, client_info_t.last_name, client_info_t.first_name, warehouse_t.warehouse_name, expeditor_t.last_name_exp, expeditor_t.first_name_exp FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t ON orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.warehouse warehouse_t ON orders_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id) subquery WHERE order_status LIKE '%' ORDER BY order_id");
             this.datagrid_orderstatus.Items.Refresh();
             this.complete_order.IsEnabled = false;
             this.reject_order.IsEnabled = false;
@@ -590,7 +585,7 @@ namespace Bookstore
         {
             this.datagrid_warehouse.Visibility = System.Windows.Visibility.Visible;
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
-            this.datagrid_warehouse.ItemsSource = DBConnect.reader_column_3x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, shop_warehouse_t.warehouse_type FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
+            this.datagrid_warehouse.ItemsSource = DBConnect.reader_column_4x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, shop_warehouse_t.warehouse_type, warehouse_t.location FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
             this.datagrid_warehouse.Items.Refresh();
             this.img_expeditor.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_books.Visibility = System.Windows.Visibility.Hidden;

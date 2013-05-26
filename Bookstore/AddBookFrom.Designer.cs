@@ -49,6 +49,7 @@
             this.comboBox_AddNewBook_WarehouseName.Name = "comboBox_AddNewBook_WarehouseName";
             this.comboBox_AddNewBook_WarehouseName.Size = new System.Drawing.Size(260, 21);
             this.comboBox_AddNewBook_WarehouseName.TabIndex = 1;
+            this.comboBox_AddNewBook_WarehouseName.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectionChanged);
             // 
             // label2
             // 
@@ -115,6 +116,7 @@
             this.checkBox_increase_amount.TabIndex = 8;
             this.checkBox_increase_amount.Text = "Increase amount";
             this.checkBox_increase_amount.UseVisualStyleBackColor = true;
+            this.checkBox_increase_amount.CheckedChanged += new System.EventHandler(this.checkBox_check_change);
             // 
             // AddBookFrom
             // 
@@ -135,7 +137,7 @@
             this.MinimizeBox = false;
             this.Name = "AddBookFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add New Book...";
+            this.Text = "Add Book...";
             this.ResumeLayout(false);
             this.PerformLayout();
 
