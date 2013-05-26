@@ -151,6 +151,7 @@
             this.Controls.Add(this.textBox_Order_id);
             this.Controls.Add(this.orderform_decline_btn);
             this.Controls.Add(this.Orderform_accept_btn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Order_Form";

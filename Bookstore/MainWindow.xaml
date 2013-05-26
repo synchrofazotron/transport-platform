@@ -507,8 +507,8 @@
             </DataGrid>
 
             <!--Expanders for expeditor  START-->
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-                <ListBox x:Name="order_list_box" TextOptions.TextFormattingMode="Display" Visibility="Hidden">
+            <StackPanel x:Name="StackPanel_Expeditor" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+                <ListBox x:Name="order_list_box" TextOptions.TextFormattingMode="Display">
                     <ListBox.Resources>
                         <Style TargetType="{x:Type Expander}">
                             <Setter
@@ -551,11 +551,12 @@
 
                     <Expander x:Name="Books_expander" Background="#191395BB" Width="135" Header="Books" TextOptions.TextFormattingMode="Display" Expanded="Books_expander_Expanded_1">
                         <Expander.Content>
-                            <ScrollViewer Height="55" VerticalAlignment="Top" >
-                                <StackPanel Height="55">
-                                    <Grid Height="55">
-                                    <Button x:Name="book_add_amount" Content="Increase amount" Width="105" Height="20" Margin="5,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
-                                        <Button x:Name="book_add_new" Content="Add New Book..." Width="105" Height="20" Margin="5,28,0,0" Click="order_status_change_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <ScrollViewer Height="80" VerticalAlignment="Top" >
+                                <StackPanel Height="80">
+                                    <Grid Height="80">
+                                        <ComboBox x:Name="combobox_exp_books" Canvas.Left="20" Canvas.Top="110" Width="105" Margin="5,5,0,0" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Visible" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                    <Button x:Name="book_add_amount" Content="Increase amount" Width="105" Height="20" Margin="5,28,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+                                        <Button x:Name="book_add_new" Content="Add New Book..." Width="105" Height="20" Margin="5,51,0,0" Click="book_add_new_Click_1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
                                     </Grid>
                                 </StackPanel>
@@ -584,7 +585,7 @@
             <!--Expanders for expeditor  END-->
 
             <!--Expanders for expeditor  START-->
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+            <StackPanel x:Name="StackPanel_Admin" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
                 <ListBox x:Name="admin_panel_left" TextOptions.TextFormattingMode="Display" Visibility="Hidden">
                     <ListBox.Resources>
                         <Style TargetType="{x:Type Expander}">

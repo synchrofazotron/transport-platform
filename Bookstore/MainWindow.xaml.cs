@@ -55,6 +55,7 @@ namespace Bookstore
             InitializeComponent();
             instance = this;
             combo1.SelectionChanged += new SelectionChangedEventHandler(comboBox1SelectionChanged);
+            combobox_exp_books.SelectionChanged += new SelectionChangedEventHandler(comboBox2SelectionChanged);
 
         }
       // ---- MAIN WINDOW FUNC - END
@@ -349,6 +350,22 @@ namespace Bookstore
         }
         // ---- COMBOX reed index for client's - END
 
+        // ---- COMBOX reed index for EXPEDITOR's - START
+        public void comboBox2SelectionChanged(object sender, EventArgs e)  //SelectionChanged
+        {
+
+            if (combobox_exp_books.SelectedIndex < 0)
+            {
+                combobox_exp_books.SelectedIndex = 0;
+            }
+
+            string shop_namestring = "'" + this.combobox_exp_books.SelectedItem.ToString() + "'";
+            if (shop_namestring == "'<All shops>'")
+                shop_namestring = "'%'";
+            this.datagrid_books.ItemsSource = DBConnect.reader_column_4x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, goods_t.book_name, avaliable_t.warehouse_amount FROM sbs.avaliable avaliable_t LEFT JOIN sbs.warehouse warehouse_t ON avaliable_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.goods goods_t ON avaliable_t.item_id = goods_t.item_id LEFT JOIN sbs.shop_warehouse shop_warehouse_t ON avaliable_t.warehouse_id = shop_warehouse_t.warehouse_id LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id WHERE shop_name LIKE " + shop_namestring + " ORDER BY shop_name");
+        }
+        // ---- COMBOX reed index for EXPEDITOR's - END
+
         // ---- EXPEDITOR CheckBoxes - START
         public void checkboxselect(object sender, EventArgs e)
         {
@@ -596,9 +613,17 @@ namespace Bookstore
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_warehouse.Visibility = System.Windows.Visibility.Hidden;
             this.img_expeditor.Visibility = System.Windows.Visibility.Hidden;
-            this.datagrid_books.ItemsSource = DBConnect.reader_column_4x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, goods_t.book_name, avaliable_t.warehouse_amount FROM sbs.avaliable avaliable_t LEFT JOIN sbs.warehouse warehouse_t ON avaliable_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.goods goods_t ON avaliable_t.item_id = goods_t.item_id LEFT JOIN sbs.shop_warehouse shop_warehouse_t ON avaliable_t.warehouse_id = shop_warehouse_t.warehouse_id LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id ORDER BY shop_name");
+            this.datagrid_books.ItemsSource = DBConnect.reader_column_4x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, goods_t.book_name, avaliable_t.warehouse_amount FROM sbs.avaliable avaliable_t LEFT JOIN sbs.warehouse warehouse_t ON avaliable_t.warehouse_id = warehouse_t.warehouse_id LEFT JOIN sbs.goods goods_t ON avaliable_t.item_id = goods_t.item_id LEFT JOIN sbs.shop_warehouse shop_warehouse_t ON avaliable_t.warehouse_id = shop_warehouse_t.warehouse_id LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id WHERE shop_name LIKE '%' ORDER BY shop_name");
             this.datagrid_books.Items.Refresh();
+            this.combobox_exp_books.ItemsSource = DBConnect.reader_column_1x("SELECT shop_name FROM sbs.shops ORDER BY shop_name");
+            this.combobox_exp_books.Items.Refresh();
             
+        }
+
+        private void book_add_new_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddBookFrom add_book_form = new AddBookFrom();
+            add_book_form.Show();
         }
         
 
