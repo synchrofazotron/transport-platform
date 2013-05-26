@@ -451,6 +451,8 @@ namespace Bookstore
             this.admin_panel_left.Visibility = System.Windows.Visibility.Hidden;
             this.admin_img_png.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_books.Visibility = System.Windows.Visibility.Hidden;
+            this.Admin12.Visibility = System.Windows.Visibility.Hidden;
+            this.Admin12.Height = 0;
 
         }
         // ---- Return button - END
@@ -475,6 +477,7 @@ namespace Bookstore
             this.complete_order.IsEnabled = false;
             this.reject_order.IsEnabled = false;
             this.order_status_change.IsEnabled = false;
+
 
         }
         // ---- EXPEDITOR button - END
@@ -619,6 +622,23 @@ namespace Bookstore
         {
             AddBookFrom add_book_form = new AddBookFrom();
             add_book_form.Show();
+        }
+
+        private void shop_ware_show_dialog(object sender, RoutedEventArgs e)
+        {
+            List<string> get_ware_temp_string = new List<string>();
+            List<Items> shop_ware_temp = new List<Items>(DBConnect.reader_column_2x("SELECT sbs.warehouse.warehouse_name, sbs.warehouse.location FROM sbs.warehouse WHERE warehouse_id NOT LIKE '0' ORDER BY warehouse_name"));
+            for (int i = 0; i < shop_ware_temp.Count; i++)
+                get_ware_temp_string.Add(string.Format("{0}", shop_ware_temp[i].reader1));
+
+
+            this.combobox_shop_Select.ItemsSource = DBConnect.reader_column_1x("SELECT shop_name FROM sbs.shops WHERE shop_id NOT LIKE '0' ORDER BY shop_name");
+            this.combobox_warehouse_select.ItemsSource = shop_ware_temp;
+            this.combobox_warehouse_loc_select.ItemsSource = get_ware_temp_string;
+
+            this.admin_img_png.Visibility = System.Windows.Visibility.Hidden;
+            this.Admin12.Visibility = System.Windows.Visibility.Visible;
+            this.Admin12.Height = 220;
         }
         
 

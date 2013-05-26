@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="mainwindow" mc:Ignorable="d" x:Class="Bookstore.MainWindow"
-        Title="BookStore" Height="470" Width="790" AllowsTransparency="True" WindowStyle="None" Icon="bs.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{x:Null}" Foreground="{x:Null}" Opacity="1" >
+        Title="BookStore" Height="470" Width="790" AllowsTransparency="True" WindowStyle="None" Icon="bs.png" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="{x:Null}" Foreground="{x:Null}" Opacity="1" >
     <Window.Resources>
 		<Storyboard x:Key="OnMouseLeftButtonDown1">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="close">
@@ -50,6 +50,56 @@
 				</EasingDoubleKeyFrame>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		<Storyboard x:Key="OnSizeChangedstart">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Admin12">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="combobox_shop_Select">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label1">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="combobox_warehouse_select">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label2">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="combobox_warehouse_loc_select">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.8" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="button_add_shop_to_ware">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.7"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="0.2"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="button_delete_shop_from_ware">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.7"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="0.2"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</Window.Resources>
     <Window.Effect>
         <DropShadowEffect RenderingBias="Quality" Opacity="0.7" BlurRadius="3" Direction="314" ShadowDepth="3"/>
@@ -75,6 +125,9 @@
 			<BeginStoryboard x:Name="Minimizemouseneter_BeginStoryboard1" Storyboard="{StaticResource Minimizemouseneter}"/>
 			<BeginStoryboard x:Name="Minimiazmoseleave_BeginStoryboard1" Storyboard="{StaticResource Minimiazmoseleave}"/>
 		</EventTrigger>
+		<EventTrigger RoutedEvent="FrameworkElement.SizeChanged" SourceName="Admin12">
+			<BeginStoryboard x:Name="OnSizeChangedstart_BeginStoryboard" Storyboard="{StaticResource OnSizeChangedstart}"/>
+		</EventTrigger>
 	</Window.Triggers>
     <Grid HorizontalAlignment="Center">
         <Rectangle/>
@@ -99,7 +152,7 @@
     			</Image>
     		</Canvas>
             <ComboBox x:Name="combo1" Canvas.Left="20" Canvas.Top="110" Width="130" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Hidden"/>
-            <DataGrid x:Name="datagrid1" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
+            <DataGrid x:Name="datagrid1" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
             Header="Book Name"
@@ -237,7 +290,7 @@
                     " ToolTip="All function for shop administrator" TextOptions.TextFormattingMode="Display" Foreground="#FF573633" Click="admin_Click" d:IsHidden="True"/>
             <Label x:Name="label_c" Content="SBS© 2013" Canvas.Left="650" Canvas.Top="415" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" d:IsHidden="True"/>
             <Button x:Name="back" Content="Back" Canvas.Left="20" Canvas.Top="28" Width="75" TextOptions.TextFormattingMode="Display" Click="back_Click" Foreground="#FF573633" Visibility="Hidden" d:IsHidden="True"/>
-            <DataGrid x:Name="datagrid_orderstatus" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionChanged="dataGrid_SelectionChanged" SelectionMode="Single" >
+            <DataGrid x:Name="datagrid_orderstatus" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionChanged="dataGrid_SelectionChanged" SelectionMode="Single" >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn 
@@ -370,7 +423,7 @@
             </DataGrid>
 
 
-            <DataGrid x:Name="datagrid_warehouse" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
+            <DataGrid x:Name="datagrid_warehouse" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
 
                        <DataGridTextColumn 
@@ -447,7 +500,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid x:Name="datagrid_books" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#7FF0F0F0" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
+            <DataGrid x:Name="datagrid_books" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn 
@@ -599,7 +652,7 @@
             </StackPanel>
             <!--Expanders for expeditor  END-->
 
-            <!--Expanders for expeditor  START-->
+            <!--Expanders for ADMIN  START-->
             <StackPanel x:Name="StackPanel_Admin" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
                 <ListBox x:Name="admin_panel_left" TextOptions.TextFormattingMode="Display" Visibility="Hidden">
                     <ListBox.Resources>
@@ -611,32 +664,18 @@
                     </ListBox.Resources>
                     <Expander x:Name="admin_warehouse" Background="#191395BB" Width="135" Header="Warehouses" TextOptions.TextFormattingMode="Display">
                         <Expander.Content>
-                            <ScrollViewer Height="40" VerticalAlignment="Top" >
-                                <StackPanel Height="40">
-                                    <Grid Height="40">
+                            <ScrollViewer Height="65" VerticalAlignment="Top" >
+                                <StackPanel Height="65">
+                                    <Grid Height="65">
                                         <Button x:Name="admin_warehouse_add_btn" Content="Add Warehouse..." Width="105" Height="20" Margin="5,10,0,0" Click="admin_warehouse_add_btn_Click_1" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="True"/>
+                                        <Button x:Name="_dialogShow" Content="Shop/Warehouse" Width="105" Height="20" Margin="5,35,0,0" Click="shop_ware_show_dialog" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="True"/>
+
                                     </Grid>
                                 </StackPanel>
                             </ScrollViewer>
                         </Expander.Content>
                     </Expander>
-                   <Expander Background="#191395BB" Width="135" Header="Expander" TextOptions.TextFormattingMode="Display">
-                        <Expander.Content>
-                            <ScrollViewer Height="100" VerticalAlignment="Top" >
-                                <StackPanel>
-                                    <RadioButton Content="Grill" GroupName="Two"/>
-                                    <RadioButton Content="Bake" GroupName="Two"/>
-                                    <RadioButton Content="Fry" GroupName="Two"/>
-                                    <RadioButton Content="Grill" GroupName="Two"/>
-                                    <RadioButton Content="Bake" GroupName="Two"/>
-                                    <RadioButton Content="Fry" GroupName="Two"/>
-                                    <RadioButton Content="Grill" GroupName="Two"/>
-                                    <RadioButton Content="Bake" GroupName="Two"/>
-                                    <RadioButton Content="Fry" GroupName="Two"/>
-                                </StackPanel>
-                            </ScrollViewer>
-                        </Expander.Content>
-                    </Expander>
+                
                     <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
                             <ItemsPresenter/>
@@ -655,7 +694,52 @@
                     </ListBox.ItemContainerStyle>
                 </ListBox>
             </StackPanel>
-            <!--Expanders for expeditor  END-->
+            <!--Expanders for ADMIN  END-->
+
+
+
+
+            <!--FINALLL for ADMIN  START-->
+            <StackPanel x:Name="Admin12" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="268" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" Height="0" Width="330" Background="#191395BB">
+                <ListBox x:Name="admin_panel_center" TextOptions.TextFormattingMode="Display">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Expander}">
+                            <Setter
+                        Property="IsExpanded"
+                        Value="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+                        </Style>
+                    </ListBox.Resources>
+                    <Grid>
+                        <Label x:Name="label" Content="Shop:" Height="20" VerticalAlignment="Top" Margin="0,20,200,0" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="48" Padding="0" VerticalContentAlignment="Center"/>
+                        <ComboBox Name = "combobox_shop_Select" Height="20" Margin="0,20,25,0" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top"/>
+						<Label x:Name="label1" Content="Warehouse:" Height="20" VerticalAlignment="Top" Margin="0,50,200,0" HorizontalAlignment="Right" Width="72" HorizontalContentAlignment="Right" Padding="0" VerticalContentAlignment="Center"/>
+                        <ComboBox Name = "combobox_warehouse_select" Height="20" Margin="0,50,25,0" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top"/>
+						<Label x:Name="label2" Content="Warehouse location:" Height="20" VerticalAlignment="Top" Margin="-18,80,200,-5" HorizontalAlignment="Right" Width="120" HorizontalContentAlignment="Right" Padding="0" VerticalContentAlignment="Center"/>
+                        <ComboBox Name = "combobox_warehouse_loc_select" Height="20" Margin="0,80,25,0" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top"/>
+						<Button Name = "button_add_shop_to_ware" Content="Add Shop" HorizontalAlignment="Left" Width="100" Margin="25,160,0,-55" Height="20" VerticalAlignment="Top"/>
+						<Button Name= "button_delete_shop_from_ware" Content = "Remove Shop" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Top" Margin="0,160,25,-55"></Button>
+                    </Grid>
+                        <ListBox.Template>
+                        <ControlTemplate TargetType="{x:Type ListBox}">
+                            <ItemsPresenter/>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </StackPanel>
+            
+            <!--FINALLLL for Admin  END-->
+
 
 
         </Canvas>
