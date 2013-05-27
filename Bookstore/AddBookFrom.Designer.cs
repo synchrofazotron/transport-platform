@@ -77,6 +77,7 @@
             this.textBox_AddNewBook_Amount.Name = "textBox_AddNewBook_Amount";
             this.textBox_AddNewBook_Amount.Size = new System.Drawing.Size(52, 20);
             this.textBox_AddNewBook_Amount.TabIndex = 3;
+            this.textBox_AddNewBook_Amount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // button_AddNewBook_Accept
             // 

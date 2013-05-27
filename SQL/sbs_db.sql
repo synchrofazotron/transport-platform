@@ -11,16 +11,14 @@ Target Server Type    : SQL Server
 Target Server Version : 90000
 File Encoding         : 65001
 
-Date: 2013-05-16 00:47:44
+Date: 2013-05-27 23:53:20
 */
-
 CREATE SCHEMA [sbs]
 GO
 
 -- ----------------------------
 -- Table structure for [sbs].[avaliable]
 -- ----------------------------
-
 CREATE TABLE [sbs].[avaliable] (
 [item_id] int NOT NULL ,
 [warehouse_id] int NOT NULL ,
@@ -33,27 +31,50 @@ GO
 -- ----------------------------
 -- Records of avaliable
 -- ----------------------------
-INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'1', N'1', N'124');
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'1', N'1', N'149');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'1', N'2', N'20');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'1', N'3', N'12');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'1', N'4', N'145');
 GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'2', N'1', N'26');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'2', N'4', N'21');
 GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'3', N'1', N'12');
 GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'4', N'1', N'68');
 GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'4', N'2', N'12');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'4', N'3', N'5');
+GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'5', N'1', N'94');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'5', N'4', N'87');
 GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'6', N'1', N'35');
 GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'6', N'2', N'2');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'6', N'4', N'10');
+GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'7', N'1', N'43');
 GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'7', N'2', N'22');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'7', N'4', N'21');
+GO
 INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'8', N'1', N'88');
+GO
+INSERT INTO [sbs].[avaliable] ([item_id], [warehouse_id], [warehouse_amount]) VALUES (N'8', N'4', N'22');
 GO
 
 -- ----------------------------
 -- Table structure for [sbs].[client_info]
 -- ----------------------------
-
 CREATE TABLE [sbs].[client_info] (
 [client_id] int NOT NULL ,
 [first_name] varchar(20) NULL ,
@@ -76,7 +97,6 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[expeditor]
 -- ----------------------------
-
 CREATE TABLE [sbs].[expeditor] (
 [expeditor_id] int NOT NULL ,
 [first_name_exp] varchar(20) NULL ,
@@ -101,7 +121,6 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[goods]
 -- ----------------------------
-
 CREATE TABLE [sbs].[goods] (
 [item_id] int NOT NULL ,
 [book_name] varchar(100) NOT NULL ,
@@ -154,12 +173,11 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[orders]
 -- ----------------------------
-
 CREATE TABLE [sbs].[orders] (
 [order_id] int NOT NULL ,
 [item_id] int NOT NULL ,
 [client_id] int NOT NULL ,
-[warehouse_id] int NOT NULL ,
+[warehouse_id] int NULL ,
 [amount] int NOT NULL ,
 [expeditor_id] int NOT NULL ,
 [order_status] varchar(22) NULL ,
@@ -172,27 +190,26 @@ GO
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'1', N'1', N'1', N'3', N'2', N'2', N'Нова', N'2013-04-28 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'1', N'1', N'1', N'4', N'2', N'2', N'Відхилена', N'2013-04-28 00:00:00.000');
 GO
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'1', N'2', N'1', N'1', N'1', N'2', N'Нова', N'2013-04-28 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'1', N'2', N'1', N'1', N'1', N'2', N'Відхилена', N'2013-04-28 00:00:00.000');
 GO
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'2', N'5', N'3', N'2', N'5', N'1', N'Відхилена', N'2013-04-28 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'2', N'5', N'3', N'3', N'5', N'1', N'Нова', N'2013-04-28 00:00:00.000');
 GO
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'3', N'5', N'3', N'1', N'2', N'1', N'Нова', N'2013-04-29 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'3', N'5', N'3', N'1', N'2', N'1', N'У виконанні', N'2013-04-29 00:00:00.000');
 GO
 INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'4', N'8', N'2', N'1', N'1', N'3', N'У виконанні', N'2013-04-30 00:00:00.000');
 GO
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'5', N'3', N'1', N'4', N'1', N'2', N'Виконана', N'2013-04-30 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'5', N'3', N'1', N'1', N'1', N'2', N'У виконанні', N'2013-04-30 00:00:00.000');
 GO
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'6', N'4', N'1', N'1', N'2', N'1', N'Скасована', N'2013-04-30 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'6', N'4', N'1', N'1', N'2', N'1', N'Виконана', N'2013-04-30 00:00:00.000');
 GO
-INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'7', N'5', N'1', N'3', N'5', N'3', N'Нова', N'2013-05-01 00:00:00.000');
+INSERT INTO [sbs].[orders] ([order_id], [item_id], [client_id], [warehouse_id], [amount], [expeditor_id], [order_status], [date]) VALUES (N'7', N'5', N'1', N'1', N'5', N'3', N'У виконанні', N'2013-05-01 00:00:00.000');
 GO
 
 -- ----------------------------
 -- Table structure for [sbs].[shop_assort]
 -- ----------------------------
-
 CREATE TABLE [sbs].[shop_assort] (
 [shop_id] int NOT NULL ,
 [item_id] int NOT NULL ,
@@ -249,11 +266,9 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[shop_warehouse]
 -- ----------------------------
-
 CREATE TABLE [sbs].[shop_warehouse] (
 [shop_id] int NOT NULL ,
-[warehouse_id] int NOT NULL ,
-[warehouse_type] varchar(12) NOT NULL 
+[warehouse_id] int NOT NULL 
 )
 
 
@@ -262,13 +277,38 @@ GO
 -- ----------------------------
 -- Records of shop_warehouse
 -- ----------------------------
-INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id], [warehouse_type]) VALUES (N'1', N'1', N'shared');
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'1', N'1');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'1', N'2');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'1', N'3');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'2', N'1');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'2', N'4');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'2', N'5');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'3', N'1');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'3', N'3');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'4', N'0');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'4', N'1');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'4', N'2');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'4', N'3');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'4', N'4');
+GO
+INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'4', N'5');
 GO
 
 -- ----------------------------
 -- Table structure for [sbs].[shops]
 -- ----------------------------
-
 CREATE TABLE [sbs].[shops] (
 [shop_id] int NOT NULL ,
 [shop_name] nvarchar(50) NOT NULL ,
@@ -295,11 +335,10 @@ GO
 -- ----------------------------
 -- Table structure for [sbs].[warehouse]
 -- ----------------------------
-
 CREATE TABLE [sbs].[warehouse] (
 [warehouse_id] int NOT NULL ,
 [warehouse_name] varchar(22) NOT NULL ,
-[location] varchar(26) NULL 
+[location] varchar(26) NOT NULL 
 )
 
 
@@ -310,11 +349,15 @@ GO
 -- ----------------------------
 INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'1', N'BestStorage', N'New Jersey, US');
 GO
+INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'5', N'NovaPoshta', N'Kyiv, Ukraine');
+GO
 INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'2', N'NovaPoshta', N'Lviv, Ukraine');
 GO
-INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'3', N'WerehouseUS', N'Atlantic City, US');
-GO
 INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'4', N'Storage4YOU', N'New York, US');
+GO
+INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'0', N'UNDEFINED', N'UNDEFINED');
+GO
+INSERT INTO [sbs].[warehouse] ([warehouse_id], [warehouse_name], [location]) VALUES (N'3', N'WerehouseUS', N'Atlantic City, US');
 GO
 
 -- ----------------------------
@@ -366,11 +409,14 @@ GO
 -- ----------------------------
 -- Indexes structure for table orders
 -- ----------------------------
+CREATE UNIQUE INDEX [INDWXX] ON [sbs].[orders]
+([order_id] ASC, [item_id] ASC, [client_id] ASC, [warehouse_id] ASC) 
+GO
 
 -- ----------------------------
 -- Primary Key structure for table [sbs].[orders]
 -- ----------------------------
-ALTER TABLE [sbs].[orders] ADD PRIMARY KEY ([order_id], [item_id], [client_id], [warehouse_id])
+ALTER TABLE [sbs].[orders] ADD PRIMARY KEY ([order_id], [item_id], [client_id])
 GO
 
 -- ----------------------------
@@ -406,6 +452,9 @@ GO
 -- ----------------------------
 -- Indexes structure for table warehouse
 -- ----------------------------
+CREATE UNIQUE INDEX [uniqe_wareh] ON [sbs].[warehouse]
+([warehouse_name] ASC, [location] ASC) 
+GO
 
 -- ----------------------------
 -- Primary Key structure for table [sbs].[warehouse]

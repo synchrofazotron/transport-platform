@@ -56,6 +56,7 @@ namespace Bookstore
             instance = this;
             combo1.SelectionChanged += new SelectionChangedEventHandler(comboBox1SelectionChanged);
             combobox_exp_books.SelectionChanged += new SelectionChangedEventHandler(comboBox2SelectionChanged);
+            combobox_warehouse_select.SelectionChanged +=new SelectionChangedEventHandler(combobox_warehouse_loc_select_SelectionChanged);
 
         }
       // ---- MAIN WINDOW FUNC - END
@@ -99,6 +100,7 @@ namespace Bookstore
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    //return 0;
                 }
             }
             return (int)ID;
@@ -366,6 +368,8 @@ namespace Bookstore
         }
         // ---- COMBOX reed index for EXPEDITOR's - END
 
+
+
         // ---- EXPEDITOR CheckBoxes - START
         public void checkboxselect(object sender, EventArgs e)
         {
@@ -453,6 +457,7 @@ namespace Bookstore
             this.datagrid_books.Visibility = System.Windows.Visibility.Hidden;
             this.Admin12.Visibility = System.Windows.Visibility.Hidden;
             this.Admin12.Height = 0;
+            this.datagrid_admin12.Visibility = System.Windows.Visibility.Hidden;
 
         }
         // ---- Return button - END
@@ -489,6 +494,8 @@ namespace Bookstore
             this.back.Visibility = System.Windows.Visibility.Visible;
             this.admin_panel_left.Visibility = System.Windows.Visibility.Visible;
             this.admin_img_png.Visibility = System.Windows.Visibility.Visible;
+            this._dialogShow.IsEnabled = true;
+            this.admin_img_png.Opacity = 100;
 
             this.user.Visibility = System.Windows.Visibility.Hidden;
             this.img_openbook.Visibility = System.Windows.Visibility.Hidden;
@@ -498,6 +505,7 @@ namespace Bookstore
             this.datagrid_warehouse.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_books.Visibility = System.Windows.Visibility.Hidden;
+
             
         }
 
@@ -588,7 +596,7 @@ namespace Bookstore
         {
             this.datagrid_warehouse.Visibility = System.Windows.Visibility.Visible;
             this.datagrid_orderstatus.Visibility = System.Windows.Visibility.Hidden;
-            this.datagrid_warehouse.ItemsSource = DBConnect.reader_column_4x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, shop_warehouse_t.warehouse_type, warehouse_t.location FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
+            this.datagrid_warehouse.ItemsSource = DBConnect.reader_column_3x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, warehouse_t.location FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
             this.datagrid_warehouse.Items.Refresh();
             this.img_expeditor.Visibility = System.Windows.Visibility.Hidden;
             this.datagrid_books.Visibility = System.Windows.Visibility.Hidden;
@@ -626,19 +634,66 @@ namespace Bookstore
 
         private void shop_ware_show_dialog(object sender, RoutedEventArgs e)
         {
-            List<string> get_ware_temp_string = new List<string>();
-            List<Items> shop_ware_temp = new List<Items>(DBConnect.reader_column_2x("SELECT sbs.warehouse.warehouse_name, sbs.warehouse.location FROM sbs.warehouse WHERE warehouse_id NOT LIKE '0' ORDER BY warehouse_name"));
-            for (int i = 0; i < shop_ware_temp.Count; i++)
-                get_ware_temp_string.Add(string.Format("{0}", shop_ware_temp[i].reader1));
+
+
+
+            this.label_type.Visibility = System.Windows.Visibility.Hidden;
+            
+            List<Items> shop_ware_temp = new List<Items>(DBConnect.reader_column_1x("SELECT DISTINCT sbs.warehouse.warehouse_name FROM sbs.warehouse WHERE warehouse_id NOT LIKE '0' ORDER BY warehouse_name"));
 
 
             this.combobox_shop_Select.ItemsSource = DBConnect.reader_column_1x("SELECT shop_name FROM sbs.shops WHERE shop_id NOT LIKE '0' ORDER BY shop_name");
             this.combobox_warehouse_select.ItemsSource = shop_ware_temp;
-            this.combobox_warehouse_loc_select.ItemsSource = get_ware_temp_string;
+            this.datagrid_admin12.ItemsSource = DBConnect.reader_column_3x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, warehouse_t.location FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id ORDER BY shop_name");
 
-            this.admin_img_png.Visibility = System.Windows.Visibility.Hidden;
+         
             this.Admin12.Visibility = System.Windows.Visibility.Visible;
+            this.datagrid_admin12.Visibility = System.Windows.Visibility.Visible;
             this.Admin12.Height = 220;
+            this._dialogShow.IsEnabled = false;
+            button_delete_shop_from_ware.IsEnabled = false;
+        }
+
+        public void combobox_warehouse_loc_select_SelectionChanged(object sender, EventArgs e)
+        {
+            if (combobox_warehouse_select.SelectedIndex < 0)
+            {
+                combobox_warehouse_select.SelectedIndex = 0;
+            }
+
+            string shop_namestring = "'" + this.combobox_warehouse_select.SelectedItem.ToString() + "'";
+            List<string> _temp_string = new List<string>();
+            this.datagrid_admin12.ItemsSource = DBConnect.reader_column_3x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, warehouse_t.location FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id WHERE warehouse_name LIKE"+ shop_namestring +" ORDER BY shop_name");
+
+            List<Items> _temp = new List<Items>(DBConnect.reader_column_1x("SELECT DISTINCT warehouse_t.location FROM sbs.warehouse warehouse_t LEFT JOIN sbs.shop_warehouse shop_warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id WHERE warehouse_name LIKE" + shop_namestring + " ORDER BY location"));
+            this.combobox_warehouse_loc_select.ItemsSource = _temp;
+
+        }
+
+        private void button_add_shop_to_ware_Click(object sender, RoutedEventArgs e)
+        {
+            int _temp_id =  ExecutScalarQuery("SELECT shops_t.shop_id FROM sbs.shops shops_t WHERE shop_name LIKE '" + combobox_shop_Select.SelectedValue +"'");
+            int _temp_ware = ExecutScalarQuery("SELECT warehouse_t.warehouse_id FROM sbs.warehouse warehouse_t WHERE warehouse_name LIKE '"+combobox_warehouse_select.SelectedValue+"' AND location LIKE '"+combobox_warehouse_loc_select.SelectedValue+"'");
+            DBQuery("INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'"+_temp_id +"', N'"+_temp_ware+"')");
+            combobox_warehouse_loc_select_SelectionChanged(sender, e);
+        }
+
+        private void button_delete_shop_from_ware_Click(object sender, RoutedEventArgs e)
+        {
+            int _temp_id = ExecutScalarQuery("SELECT shops_t.shop_id FROM sbs.shops shops_t WHERE shop_name LIKE '" + combobox_shop_Select.SelectedValue + "'");
+            int _temp_ware = ExecutScalarQuery("SELECT warehouse_t.warehouse_id FROM sbs.warehouse warehouse_t WHERE warehouse_name LIKE '" + combobox_warehouse_select.SelectedValue + "' AND location LIKE '" + combobox_warehouse_loc_select.SelectedValue + "'");
+            int _temp_status = ExecutScalarQuery("SELECT order_id FROM sbs.orders WHERE warehouse_id = '" +_temp_ware+ "' AND order_status = 'У виконанні'");
+            if (_temp_status == 0)
+            {
+                DBQuery("UPDATE sbs.orders SET warehouse_id = '0' WHERE warehouse_id = '" + _temp_ware + "'");
+                combobox_warehouse_loc_select_SelectionChanged(sender, e);
+                MessageBox.Show("sdfsdf");
+            }
+            else
+            {
+                MessageBox.Show("Delete error! Please, finish all order's for that warehouse.");
+            }
+
         }
         
 

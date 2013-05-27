@@ -106,5 +106,13 @@ namespace Bookstore
             MainWindow.instance.comboBox2SelectionChanged(sender, e);
             this.Close();
         }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

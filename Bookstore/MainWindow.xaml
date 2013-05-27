@@ -99,6 +99,84 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="0.2"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:3.2" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="datagrid_admin12">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.2" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="datagrid_admin12">
+				<EasingDoubleKeyFrame KeyTime="0" Value="250">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="250">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="250">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.2" Value="250">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="datagrid_admin12">
+				<EasingDoubleKeyFrame KeyTime="0" Value="30">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="30">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="30">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.2" Value="330">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="admin_img_png">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</Window.Resources>
     <Window.Effect>
@@ -125,8 +203,11 @@
 			<BeginStoryboard x:Name="Minimizemouseneter_BeginStoryboard1" Storyboard="{StaticResource Minimizemouseneter}"/>
 			<BeginStoryboard x:Name="Minimiazmoseleave_BeginStoryboard1" Storyboard="{StaticResource Minimiazmoseleave}"/>
 		</EventTrigger>
-		<EventTrigger RoutedEvent="FrameworkElement.SizeChanged" SourceName="Admin12">
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="_dialogShow">
 			<BeginStoryboard x:Name="OnSizeChangedstart_BeginStoryboard" Storyboard="{StaticResource OnSizeChangedstart}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="back">
+			<RemoveStoryboard BeginStoryboardName="OnSizeChangedstart_BeginStoryboard"/>
 		</EventTrigger>
 	</Window.Triggers>
     <Grid HorizontalAlignment="Center">
@@ -465,24 +546,6 @@
                     <DataGridTextColumn 
             			Header="Warehouse Location"
             			Width="*"
-            			Binding="{Binding reader3}" >
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="TextWrapping" Value="Wrap"/>
-                                <Setter Property="TextAlignment"   Value="Center" />
-                                <Setter Property="VerticalAlignment"   Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="{x:Type TextBox}">
-                                <Setter Property="Foreground" Value="Blue"/>
-                            </Style>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn 
-            			Header="Type"
-            			Width="100"
             			Binding="{Binding reader2}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
@@ -497,6 +560,7 @@
                             </Style>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -700,7 +764,7 @@
 
 
             <!--FINALLL for ADMIN  START-->
-            <StackPanel x:Name="Admin12" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="268" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" Height="0" Width="330" Background="#191395BB">
+            <StackPanel x:Name="Admin12" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="170" Canvas.Top="110" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" Height="220" Width="330" Background="#191395BB" Visibility="Hidden">
                 <ListBox x:Name="admin_panel_center" TextOptions.TextFormattingMode="Display">
                     <ListBox.Resources>
                         <Style TargetType="{x:Type Expander}">
@@ -716,8 +780,8 @@
                         <ComboBox Name = "combobox_warehouse_select" Height="20" Margin="0,50,25,0" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top"/>
 						<Label x:Name="label2" Content="Warehouse location:" Height="20" VerticalAlignment="Top" Margin="-18,80,200,-5" HorizontalAlignment="Right" Width="120" HorizontalContentAlignment="Right" Padding="0" VerticalContentAlignment="Center"/>
                         <ComboBox Name = "combobox_warehouse_loc_select" Height="20" Margin="0,80,25,0" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top"/>
-						<Button Name = "button_add_shop_to_ware" Content="Add Shop" HorizontalAlignment="Left" Width="100" Margin="25,160,0,-55" Height="20" VerticalAlignment="Top"/>
-						<Button Name= "button_delete_shop_from_ware" Content = "Remove Shop" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Top" Margin="0,160,25,-55"></Button>
+						<Button Name = "button_add_shop_to_ware" Content="Add Shop" HorizontalAlignment="Left" Width="100" Margin="25,0,0,-80" Height="20" VerticalAlignment="Bottom" Click="button_add_shop_to_ware_Click"/>
+						<Button Name= "button_delete_shop_from_ware" Content = "Remove Shop" HorizontalAlignment="Right" Width="100" Margin="0,0,25,-80" Height="21" VerticalAlignment="Bottom" Click="button_delete_shop_from_ware_Click"/>
                     </Grid>
                         <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
@@ -736,9 +800,69 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
+                <Label x:Name="label_type" Content="Selected warehouse is Shared" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF780000" FontSize="16" Margin="0,10,0,0"/>
             </StackPanel>
-            
+            <DataGrid x:Name="datagrid_admin12" RowHeight="40" AutoGenerateColumns="False" Height="330" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" SelectionMode="Single" Canvas.Left="515" Canvas.Top="110" Width="250" Opacity="0" Visibility="Hidden" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+            			Header="Shop"
+            			Width="*"
+            			Binding="{Binding reader0}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Warehouse"
+            			Width="85"
+            			Binding="{Binding reader1}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Location"
+            			Width="75"
+            			Binding="{Binding reader2}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
             <!--FINALLLL for Admin  END-->
+            
+            
 
 
 
