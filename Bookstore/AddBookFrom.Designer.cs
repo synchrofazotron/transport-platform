@@ -96,6 +96,7 @@
             this.listBox_BookName.Name = "listBox_BookName";
             this.listBox_BookName.Size = new System.Drawing.Size(260, 95);
             this.listBox_BookName.TabIndex = 7;
+            this.listBox_BookName.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBoxMouseMoved);
             // 
             // label1
             // 
