@@ -97,9 +97,9 @@ namespace Bookstore
                     conn.Open();
                     ID = (Int32)cmd.ExecuteScalar();
                 }
-                catch (Exception ex)
+                catch //(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                     //return 0;
                 }
             }
@@ -651,8 +651,13 @@ namespace Bookstore
             this.datagrid_admin12.Visibility = System.Windows.Visibility.Visible;
             this.Admin12.Height = 220;
             this._dialogShow.IsEnabled = false;
-            button_delete_shop_from_ware.IsEnabled = false;
-        }
+            if (combobox_shop_Select.SelectedIndex == -1)
+                combobox_shop_Select.SelectedIndex = 0;
+            if (combobox_warehouse_loc_select.SelectedIndex == -1)
+                combobox_warehouse_loc_select.SelectedIndex = 0;
+            if (combobox_warehouse_select.SelectedIndex == -1)
+                combobox_warehouse_select.SelectedIndex = 0;
+        }//Uggly code. notime for optimisation
 
         public void combobox_warehouse_loc_select_SelectionChanged(object sender, EventArgs e)
         {
@@ -661,6 +666,8 @@ namespace Bookstore
                 combobox_warehouse_select.SelectedIndex = 0;
             }
 
+            
+
             string shop_namestring = "'" + this.combobox_warehouse_select.SelectedItem.ToString() + "'";
             List<string> _temp_string = new List<string>();
             this.datagrid_admin12.ItemsSource = DBConnect.reader_column_3x("SELECT shops_t.shop_name, warehouse_t.warehouse_name, warehouse_t.location FROM sbs.shop_warehouse shop_warehouse_t LEFT JOIN sbs.shops shops_t ON shop_warehouse_t.shop_id = shops_t.shop_id LEFT JOIN sbs.warehouse warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id WHERE warehouse_name LIKE"+ shop_namestring +" ORDER BY shop_name");
@@ -668,7 +675,10 @@ namespace Bookstore
             List<Items> _temp = new List<Items>(DBConnect.reader_column_1x("SELECT DISTINCT warehouse_t.location FROM sbs.warehouse warehouse_t LEFT JOIN sbs.shop_warehouse shop_warehouse_t ON shop_warehouse_t.warehouse_id = warehouse_t.warehouse_id WHERE warehouse_name LIKE" + shop_namestring + " ORDER BY location"));
             this.combobox_warehouse_loc_select.ItemsSource = _temp;
 
-        }
+            if (combobox_warehouse_loc_select.SelectedIndex < 0)
+                combobox_warehouse_loc_select.SelectedIndex = 0;
+
+        }//Uggly code. notime for optimisation
 
         private void button_add_shop_to_ware_Click(object sender, RoutedEventArgs e)
         {
@@ -676,25 +686,28 @@ namespace Bookstore
             int _temp_ware = ExecutScalarQuery("SELECT warehouse_t.warehouse_id FROM sbs.warehouse warehouse_t WHERE warehouse_name LIKE '"+combobox_warehouse_select.SelectedValue+"' AND location LIKE '"+combobox_warehouse_loc_select.SelectedValue+"'");
             DBQuery("INSERT INTO [sbs].[shop_warehouse] ([shop_id], [warehouse_id]) VALUES (N'"+_temp_id +"', N'"+_temp_ware+"')");
             combobox_warehouse_loc_select_SelectionChanged(sender, e);
-        }
+        }//Uggly code. notime for optimisation
 
-        private void button_delete_shop_from_ware_Click(object sender, RoutedEventArgs e)
+        private void button_delete_shop_from_ware_Click(object sender, RoutedEventArgs e) 
         {
+            if (combobox_shop_Select.SelectedIndex == -1)
+                combobox_shop_Select.SelectedIndex = 0;
+            
             int _temp_id = ExecutScalarQuery("SELECT shops_t.shop_id FROM sbs.shops shops_t WHERE shop_name LIKE '" + combobox_shop_Select.SelectedValue + "'");
             int _temp_ware = ExecutScalarQuery("SELECT warehouse_t.warehouse_id FROM sbs.warehouse warehouse_t WHERE warehouse_name LIKE '" + combobox_warehouse_select.SelectedValue + "' AND location LIKE '" + combobox_warehouse_loc_select.SelectedValue + "'");
-            int _temp_status = ExecutScalarQuery("SELECT order_id FROM sbs.orders WHERE warehouse_id = '" +_temp_ware+ "' AND order_status = 'У виконанні'");
+            int _temp_status = ExecutScalarQuery("SELECT order_id FROM sbs.orders WHERE warehouse_id = '"+_temp_ware+"' AND order_status = 'У виконанні' AND expeditor_id IN (SELECT sbs.expeditor.expeditor_id FROM sbs.expeditor WHERE shop_id = '"+_temp_id+"')");
             if (_temp_status == 0)
             {
-                DBQuery("UPDATE sbs.orders SET warehouse_id = '0' WHERE warehouse_id = '" + _temp_ware + "'");
+                _temp_status = DBQuery("DELETE FROM sbs.shop_warehouse WHERE shop_id = '" + _temp_id + "' AND warehouse_id = '" + _temp_ware + "'");
                 combobox_warehouse_loc_select_SelectionChanged(sender, e);
-                MessageBox.Show("sdfsdf");
+
             }
             else
             {
                 MessageBox.Show("Delete error! Please, finish all order's for that warehouse.");
             }
 
-        }
+        }//Uggly code. notime for optimisation
         
 
    
