@@ -57,7 +57,8 @@ namespace Bookstore
             combo1.SelectionChanged += new SelectionChangedEventHandler(comboBox1SelectionChanged);
             combobox_exp_books.SelectionChanged += new SelectionChangedEventHandler(comboBox2SelectionChanged);
             combobox_warehouse_select.SelectionChanged +=new SelectionChangedEventHandler(combobox_warehouse_loc_select_SelectionChanged);
-
+            txtbox_client_surr.PreviewTextInput += new TextCompositionEventHandler(textBox_PreviewTextInput);
+            txt_box_client_name.PreviewTextInput += new TextCompositionEventHandler(textBox_PreviewTextInput);
         }
       // ---- MAIN WINDOW FUNC - END
 
@@ -207,6 +208,35 @@ namespace Bookstore
             return table;
         }
 
+
+            public static List<Items> reader_column_5x(String commandText)
+            {
+
+                List<Items> table = new List<Items>();
+                using (SqlConnection connection = new SqlConnection(Global.connectionString[0]))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Items item = new Items();
+                                item.reader0 = reader[0].ToString();
+                                item.reader1 = reader[1].ToString();
+                                item.reader2 = reader[2].ToString();
+                                item.reader3 = reader[3].ToString();
+                                item.reader4 = reader[4].ToString();
+                                table.Add(item);
+                            }
+                        }
+                    }
+                    connection.Close();
+                    connection.Dispose();
+                }
+                return table;
+            }
 
 
         /// ---- Datagrid fill function for EXPEDITOR's - START
@@ -414,6 +444,7 @@ namespace Bookstore
             this.combo1.Visibility = System.Windows.Visibility.Visible;
             this.datagrid1.Visibility = System.Windows.Visibility.Visible;
             this.back.Visibility = System.Windows.Visibility.Visible;
+            this.client_orders.Visibility = System.Windows.Visibility.Visible;
             this.user.Visibility = System.Windows.Visibility.Hidden;
             this.img_openbook.Visibility = System.Windows.Visibility.Hidden;
             this.expeditor.Visibility = System.Windows.Visibility.Hidden;
@@ -458,6 +489,8 @@ namespace Bookstore
             this.Admin12.Visibility = System.Windows.Visibility.Hidden;
             this.Admin12.Height = 0;
             this.datagrid_admin12.Visibility = System.Windows.Visibility.Hidden;
+            this.datagrid_client_5.Visibility = System.Windows.Visibility.Hidden;
+            this.client_orders.Visibility = System.Windows.Visibility.Hidden;
 
         }
         // ---- Return button - END
@@ -708,9 +741,62 @@ namespace Bookstore
             }
 
         }//Uggly code. notime for optimisation
+
+
+        private void txt_box_client_name_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.txt_box_client_name.Text == "Name")
+                this.txt_box_client_name.Clear();
+        }
+
+        private void txt_box_client_name_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.txt_box_client_name.Text == "")
+                this.txt_box_client_name.Text = "Name";
+
+        }
+
+        private void txtbox_client_surr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.txtbox_client_surr.Text == "")
+                this.txtbox_client_surr.Text = "Surname";
+        }
+
+        private void txtbox_client_surr_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.txtbox_client_surr.Text == "Surname")
+                this.txtbox_client_surr.Clear();
+        }
+
+        private void client_expander_exp(object sender, RoutedEventArgs e)
+        {
+                this.datagrid_client_5.Visibility = System.Windows.Visibility.Visible;
+                this.datagrid1.Visibility = System.Windows.Visibility.Hidden;
+
+
+        }
+
+        private void client_orders_Collapsed(object sender, RoutedEventArgs e)
+        {
+            this.datagrid_client_5.Visibility = System.Windows.Visibility.Hidden;
+            this.datagrid1.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsLetter(e.Text, 0)) e.Handled = true;
+        }
+
+        private void txtbox_client_surr_TextChanged(object sender, RoutedEventArgs e)
+        {
+            string name = this.txt_box_client_name.Text.Trim();
+            string surn = this.txtbox_client_surr.Text.Trim();
+            this.datagrid_client_5.ItemsSource = DBConnect.reader_column_5x("SELECT goods_t.book_name, orders_t.amount, shops_t.shop_name, orders_t.order_status, orders_t.[date] FROM sbs.orders orders_t LEFT JOIN sbs.goods goods_t on orders_t.item_id = goods_t.item_id LEFT JOIN sbs.client_info client_info_t ON orders_t.client_id = client_info_t.client_id LEFT JOIN sbs.expeditor expeditor_t ON orders_t.expeditor_id = expeditor_t.expeditor_id LEFT JOIN sbs.shops shops_t ON expeditor_t.shop_id = shops_t.shop_id WHERE first_name = '"+name+"' AND last_name = '"+surn+"'");
+        }
+
         
 
-   
+ 
 	}
 }
  

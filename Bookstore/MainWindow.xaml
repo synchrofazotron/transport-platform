@@ -232,7 +232,7 @@
     				</Image.RenderTransform>
     			</Image>
     		</Canvas>
-            <ComboBox x:Name="combo1" Canvas.Left="20" Canvas.Top="110" Width="130" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Hidden"/>
+            <ComboBox x:Name="combo1" Canvas.Left="20" Canvas.Top="110" Width="130" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" SelectedIndex="0" Visibility="Hidden"/>
             <DataGrid x:Name="datagrid1" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
@@ -687,7 +687,7 @@
                             <ScrollViewer Height="55" VerticalAlignment="Top" >
                                 <StackPanel Height="55">
                                     <Grid Height="55">
-                                        <ComboBox x:Name="combobox_exp_books" Canvas.Left="20" Canvas.Top="110" Width="105" Margin="5,5,0,0" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Visible" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        <ComboBox x:Name="combobox_exp_books" Canvas.Left="20" Canvas.Top="110" Width="105" Margin="5,5,0,0" TextOptions.TextFormattingMode="Display" ToolTip="Choose the shop" Visibility="Visible" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0"/>
                                         <Button x:Name="book_add_new" Content="Add New Book..." Width="105" Height="20" Margin="5,28,0,0" Click="book_add_new_Click_1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
                                     </Grid>
@@ -759,6 +759,54 @@
                 </ListBox>
             </StackPanel>
             <!--Expanders for ADMIN  END-->
+
+
+
+
+            <!--Expanders for CLIENT START-->
+            <StackPanel x:Name="StackPanel_CLIENT" Orientation="Vertical" VerticalAlignment="Top" FlowDirection="LeftToRight" Canvas.Left="20" Canvas.Top="140" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+                <ListBox x:Name="client_list" TextOptions.TextFormattingMode="Display">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Expander}">
+                            <Setter
+                        Property="IsExpanded"
+                        Value="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+                        </Style>
+                    </ListBox.Resources>
+                    <Expander x:Name="client_orders" Background="#191395BB" Width="135" Header="Orders" TextOptions.TextFormattingMode="Display" Expanded="client_expander_exp" Collapsed="client_orders_Collapsed" Visibility="Hidden">
+                        <Expander.Content>
+                            <ScrollViewer Height="100" VerticalAlignment="Top" >
+                                <StackPanel Height="100">
+                                    <Grid Height="100">
+                                        <TextBox x:Name="txt_box_client_name" Height="23" VerticalAlignment="Top" Margin="5,10,5,0" Background="#66FFFFFF" BorderBrush="#660E87DA" Text="Name" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#990065AA" GotFocus="txt_box_client_name_GotFocus" LostFocus="txt_box_client_name_LostFocus" PreviewTextInput="textBox_PreviewTextInput" />
+                                        <TextBox x:Name="txtbox_client_surr" Height="23" VerticalAlignment="Top" Margin="5,38,5,0" Background="#66FFFFFF" BorderBrush="#660E87DA" Text="Surname" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#990065AA" LostFocus="txtbox_client_surr_LostFocus" GotFocus="txtbox_client_surr_GotFocus" PreviewTextInput="textBox_PreviewTextInput" />
+                                        <Button x:Name="client_add_order" Content="Show orders..." Width="105" Height="20" Margin="5,72,0,0" Click="txtbox_client_surr_TextChanged" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="True"/>
+
+                                    </Grid>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Expander.Content>
+                    </Expander>
+
+                    <ListBox.Template>
+                        <ControlTemplate TargetType="{x:Type ListBox}">
+                            <ItemsPresenter/>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </StackPanel>
+            <!--Expanders for CLIENT  END-->
 
 
 
@@ -861,8 +909,104 @@
             </DataGrid>
 
             <!--FINALLLL for Admin  END-->
-            
-            
+
+
+
+            <DataGrid x:Name="datagrid_client_5" RowHeight="60" AutoGenerateColumns="False" Canvas.Left="173" Canvas.Top="110" Height="330" Width="580" BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Background="#191395BB" HeadersVisibility="Column" RowBackground="#00000000" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" TextOptions.TextFormattingMode="Display" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="30" VerticalScrollBarVisibility="Visible" Visibility="Hidden" SelectionMode="Single" >
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn 
+            			Header="Book Name"
+            			Width="*"
+            			Binding="{Binding reader0}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Amount"
+            			Width="SizeToHeader"
+            			Binding="{Binding reader1}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn 
+            			Header="Shop Name"
+            			Width="100"
+            			Binding="{Binding reader2}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn 
+            			Header="Status"
+            			Width="100"
+            			Binding="{Binding reader3}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn 
+            			Header="Date"
+            			Width="120"
+            			Binding="{Binding reader4}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment"   Value="Center" />
+                                <Setter Property="VerticalAlignment"   Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+
 
 
 
